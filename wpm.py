@@ -2,28 +2,45 @@ from msvcrt import getch
 from os import system
 from random_sentence import SentenceNow as sn
 
-#gonna calculate wpm soon
-
-#create random sentence, then split into list
 wordsplit=[]
-words=sn()
-for f in words:
-    wordsplit.append(f)
+words=""
+thestring="freeze"
+def newWord(words,wordsplit):
+    wordsplit=[]
+    words=sn()
+    for f in words:
+        wordsplit.append(f)
+    system("cls")
+    print words
+    return words,wordsplit
+words,wordsplit=newWord(words,wordsplit)
 
-#display words for the first time
-print words
+thestring=""
+for f in wordsplit:
+    thestring+=str(f)
 
-#loop
+
 while True:
 
     #get key press with getch
-    key = chr(ord(getch()))
+    
 
-    #if the key is the one we are looking for, continue onward
-    if key == wordsplit[0]:
-        wordsplit=wordsplit[1:]
+    if len(thestring) == 0:
         thestring=""
+        words,wordsplit=newWord(words,wordsplit)
         for f in wordsplit:
             thestring+=str(f)
-        system("cls")
-        print thestring
+    key = chr(ord(getch()))
+    #if the key is the one we are looking for, continue onward
+    if len(thestring) != 0:
+        if key == wordsplit[0]:
+            wordsplit=wordsplit[1:]
+            thestring=""
+            for f in wordsplit:
+                thestring+=str(f)
+            system("cls")
+            print thestring
+            print len(thestring)
+
+    
+            
